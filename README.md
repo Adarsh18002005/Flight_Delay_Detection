@@ -91,3 +91,12 @@ How it All Works Together (The Workflow):
    * The model makes a prediction (delayed/on-time) and calculates the probability.
    * app.py renders index.html again, but this time it includes the prediction outcome and probability, which are then displayed to the user.
 This integrated approach combines powerful machine learning with an accessible web interface, making your Flight Delay Detection project a practical tool for real-world scenarios.
+
+
+#Output
+<img width="809" alt="Screenshot 2025-06-25 at 12 32 47 AM" src="https://github.com/user-attachments/assets/3b041318-a9b1-4eea-9f91-c0286635ae6f" />
+
+<img width="796" alt="Screenshot 2025-06-25 at 12 33 40 AM" src="https://github.com/user-attachments/assets/9c20e380-e770-414c-a979-abf5ce191d20" />
+
+
+
