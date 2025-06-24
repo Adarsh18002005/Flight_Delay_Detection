@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Delay Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        label { display: block; margin-bottom: 5px; }
+        input, select { width: calc(100% - 22px); padding: 8px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .result { margin-top: 20px; padding: 10px; border: 1px solid #eee; background-color: #f9f9f9; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flight Delay Prediction</h1>
+        <form action="/predict" method="post">
+            <label for="month">Month:</label>
+            <input type="number" id="month" name="month" required min="1" max="12">
+
+            <label for="day_of_month">Day of Month:</label>
+            <input type="number" id="day_of_month" name="day_of_month" required min="1" max="31">
+
+            <label for="day_of_week">Day of Week (1=Monday, 7=Sunday):</label>
+            <input type="number" id="day_of_week" name="day_of_week" required min="1" max="7">
+
+            <label for="unique_carrier">Unique Carrier (e.g., DL for Delta):</label>
+            <input type="text" id="unique_carrier" name="unique_carrier" required>
+
+            <label for="origin">Origin Airport (e.g., ATL):</label>
+            <input type="text" id="origin" name="origin" required>
+
+            <label for="dest">Destination Airport (e.g., SEA):</label>
+            <input type="text" id="dest" name="dest" required>
+
+            <label for="crs_dep_time">Scheduled Departure Time (HHMM, e.g., 1905 for 7:05 PM):</label>
+            <input type="number" id="crs_dep_time" name="crs_dep_time" required min="0" max="2359">
+
+            <label for="distance">Distance (miles):</label>
+            <input type="number" id="distance" name="distance" step="any" required>
+
+            <label for="crs_elapsed_time">Scheduled Elapsed Time (minutes):</label>
+            <input type="number" id="crs_elapsed_time" name="crs_elapsed_time" step="any" required>
+
+            <label for="dep_delay">Departure Delay (minutes, enter 0 for on-time or negative for early):</label>
+            <input type="number" id="dep_delay" name="dep_delay" step="any" required>
+
+            <label for="cancelled">Cancelled (0=No, 1=Yes):</label>
+            <select id="cancelled" name="cancelled" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <label for="diverted">Diverted (0=No, 1=Yes):</label>
+            <select id="diverted" name="diverted" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <button type="submit">Predict Delay</button>
+        </form>
+
+        {% if prediction_result %}
+            <div class="result">
+                <h2>Prediction Result:</h2>
+                <p>The flight is predicted to be: <strong>{{ prediction_result }}</strong></p>
+                <p>Probability of Delay: <strong>{{ delay_proba }}</strong></p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
